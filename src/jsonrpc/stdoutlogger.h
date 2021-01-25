@@ -2,7 +2,9 @@
 
 #include "types.h"
 
-#include <iostream>
+#include <string>
+
+namespace ApiGear { namespace JSONRPC {
 
 class StdoutLogger : public ILogger {
 public:
@@ -13,4 +15,4 @@ public:
     void warning(std::string message) override;
     void error(std::string message) override;
 };
-
+}} // ApiGear // JSONRPC

@@ -1,5 +1,7 @@
 #include "stdoutlogger.h"
+#include <iostream>
 
+namespace ApiGear { namespace JSONRPC {
 
 void StdoutLogger::info(std::string message)
 {
@@ -20,3 +22,4 @@ void StdoutLogger::error(std::string message)
 {
     std::cout << "[error  ] " << message << std::endl;
 }
+}} // ApiGear // JSONRPC

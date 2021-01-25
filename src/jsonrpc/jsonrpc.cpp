@@ -2,6 +2,8 @@
 
 using json = nlohmann::json;
 
+namespace ApiGear { namespace JSONRPC {
+
 JsonRpc::JsonRpc()
 {
 }
@@ -49,3 +51,4 @@ json JsonRpc::errorMessage(Id id, int code, string message)
     j["error"] = err;
     return j;
 }
+}} // ApiGear // JSONRPC
