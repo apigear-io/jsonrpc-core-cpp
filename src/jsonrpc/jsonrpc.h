@@ -1,8 +1,8 @@
 #pragma once
 
-
 #include "types.h"
 
+namespace ApiGear { namespace JSONRPC {
 
 class JsonRpc
 {
@@ -14,4 +14,4 @@ public:
     static json errorMessage(Id callId, int code, string message);
 
 };
-
+}} // ApiGear // JSONRPC

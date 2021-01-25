@@ -4,6 +4,8 @@
 #include "types.h"
 #include <map>
 
+namespace ApiGear { namespace JSONRPC {
+
 class RpcProtocol : public IMessageHandler
 {
 public:
@@ -36,4 +38,4 @@ private:
     std::map<std::string, NotifyRequestFunc> m_notifyRegistry;
     ErrorResponseFunc m_errorHandler;
 };
-
+}} // ApiGear // JSONRPC

@@ -1,5 +1,7 @@
 #include "rpcprotocol.h"
 
+namespace ApiGear { namespace JSONRPC {
+
 RpcProtocol::RpcProtocol(IRpcProtocolListener *listener, IMessageWriter *writer, ILogger *log, MessageFormat format)
     : m_listener(listener)
     , m_writer(writer)
@@ -54,12 +56,12 @@ void RpcProtocol::handleMessage(string message)
     if(j.contains("error")) {
         const json error = j["error"];
         const int code = error["code"].get<int>();
-        const std::string message = error["message"].get<std::string>();
-        return handleError(id, code, message);
+        const std::string errormessage = error["message"].get<std::string>();
+        return handleError(id, code, errormessage);
     }
     // handle call request (id && method)
     if(id && j.contains("method")) {
-        const std::string method = j["method"];
+        const std::string method = j["method"].get<std::string>();
         const Params params = j["params"].get<Params>();
         return handleCallRequest(id, method, params);
     }
@@ -74,7 +76,7 @@ void RpcProtocol::handleMessage(string message)
     }
     // handle notify request (no id && method)
     if(!id && j.contains("method")) {
-        const std::string method = j["method"];
+        const std::string method = j["method"].get<std::string>();
         const Params params = j["params"].get<Params>();
         return handleNotifyRequest(method, params);
     }
@@ -131,6 +133,8 @@ json RpcProtocol::fromMessage(string message)
     case MessageFormat::CBOR:
         return json::from_cbor(message);
     }
+
+    return json();
 }
 
 string RpcProtocol::toMessage(json j)
@@ -149,6 +153,8 @@ string RpcProtocol::toMessage(json j)
         v = json::to_cbor(j);
         return string(v.begin(), v.end());
     }
+
+    return string();
 }
 
 void RpcProtocol::writeJson(json j)
@@ -162,4 +168,4 @@ Id RpcProtocol::nextId()
     m_nextId++;
     return m_nextId;
 }
-
+}} // ApiGear // JSONRPC

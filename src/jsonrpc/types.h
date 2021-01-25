@@ -9,6 +9,8 @@ using json = nlohmann::json;
 
 using namespace std;
 
+namespace ApiGear { namespace JSONRPC {
+
 typedef unsigned long long Id;
 typedef json::object_t Params;
 
@@ -102,4 +104,4 @@ class IRpcProtocolListener
 public:
     virtual void onNotify(std::string method, Params params) = 0;
 };
-
+}} // ApiGear // JSONRPC
