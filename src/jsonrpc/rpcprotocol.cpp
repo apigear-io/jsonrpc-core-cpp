@@ -104,12 +104,16 @@ void RpcProtocol::handleCallResult(Id id, json result)
 
 void RpcProtocol::handleNotifyRequest(string method, Params params)
 {
-    const NotifyRequestFunc& func = m_notifyRegistry[method];
-    NotifyRequestArg arg;
-    arg.params = params;
-    func(arg);
-    if(m_listener) {
-        m_listener->onNotify(method, params);
+    if(m_notifyRegistry.count(method) == 1)
+    {
+        const NotifyRequestFunc& func = m_notifyRegistry[method];
+        NotifyRequestArg arg;
+        arg.params = params;
+        func(arg);
+    }
+    else
+    {
+        m_log->error("json rpc no notification registered for " + method);
     }
 }
 
