@@ -1,4 +1,4 @@
-
+project(jsonrpc-core)
 
 set(JSONRPC_SOURCES
         jsonrpc/types.cpp
@@ -34,7 +34,7 @@ install(TARGETS jsonrpc_core
         LIBRARY DESTINATION lib COMPONENT Runtime
         ARCHIVE DESTINATION lib/jsonrpc_core COMPONENT Development)
 # install includes
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/olink DESTINATION include FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.h")
 include(CMakePackageConfigHelpers)
 export(TARGETS
     jsonrpc_core
