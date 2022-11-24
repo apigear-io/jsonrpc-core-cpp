@@ -1,4 +1,4 @@
-project(jsonrpc-core)
+project(jsonrpc_core)
 
 set(JSONRPC_SOURCES
         jsonrpc/types.cpp
