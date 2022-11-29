@@ -27,10 +27,13 @@
 #include <QtWebSockets>
 #include "jsonrpc/types.h"
 
+namespace ApiGear{
+namespace JSONRPC{
 class RpcProtocol;
+}}
 
 
-class QJsonRpc : public QObject, public IMessageWriter, public IRpcProtocolListener
+class QJsonRpc : public QObject, public ApiGear::JSONRPC::IMessageWriter, public ApiGear::JSONRPC::IRpcProtocolListener
 {
     Q_OBJECT
 public:
@@ -50,11 +53,11 @@ public:
     json variantToJson(const QVariant& var);
     QVariant jsonToVariant(json j);
 private:
-    ILogger *m_log;
+    ApiGear::JSONRPC::ILogger *m_log;
     QWebSocket *m_socket;
-    RpcProtocol *m_session;
+    ApiGear::JSONRPC::RpcProtocol *m_session;
 
     // IRpcProtocolListener interface
 public:
-    void onNotify(string method, Params params) override;
+    void onNotify(string method, ApiGear::JSONRPC::Params params) override;
 };

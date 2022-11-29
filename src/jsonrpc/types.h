@@ -35,7 +35,7 @@ using namespace std;
 namespace ApiGear { namespace JSONRPC {
 
 typedef unsigned long long Id;
-typedef json::object_t Params;
+typedef nlohmann::json Params;
 
 
 enum class MessageFormat : int

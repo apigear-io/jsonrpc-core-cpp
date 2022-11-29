@@ -30,8 +30,8 @@
 QJsonRpc::QJsonRpc(QObject *parent)
     : QObject(parent)
     , m_socket(new QWebSocket(QString(), QWebSocketProtocol::VersionLatest, this))
-    , m_log(new StdoutLogger())
-    , m_session(new RpcProtocol(this, this, m_log, MessageFormat::JSON))
+    , m_log(new ApiGear::JSONRPC::StdoutLogger())
+    , m_session(new ApiGear::JSONRPC::RpcProtocol(this, this, m_log, ApiGear::JSONRPC::MessageFormat::JSON))
 
 {
     connect(m_socket, &QWebSocket::connected, this, &QJsonRpc::onConnected);
@@ -73,7 +73,7 @@ void QJsonRpc::handleTextMessage(const QString &message)
 
 void QJsonRpc::doCall(const QString &method, const QVariantMap &params)
 {
-    CallResponseFunc func = [](CallResponseArg) { qDebug() << "call result"; };
+    ApiGear::JSONRPC::CallResponseFunc func = [](ApiGear::JSONRPC::CallResponseArg) { qDebug() << "call result"; };
     m_session->doCall(method.toStdString(), variantToJson(params), func);
 }
 
@@ -84,9 +84,9 @@ void QJsonRpc::doNotify(const QString &method, const QVariantMap &params)
 
 void QJsonRpc::doRegisterCall(const QString &method)
 {
-    CallRequestFunc func = [](CallRequestArg arg) {
+    ApiGear::JSONRPC::CallRequestFunc func = [](ApiGear::JSONRPC::CallRequestArg arg) {
         qDebug() << "registered method called";
-        CallResponseArg response;
+        ApiGear::JSONRPC::CallResponseArg response;
         response.result = arg.params;
         return response;
     };
@@ -107,7 +107,7 @@ QVariant QJsonRpc::jsonToVariant(json j)
     return doc.toVariant();
 }
 
-void QJsonRpc::onNotify(string method, Params params)
+void QJsonRpc::onNotify(string method, ApiGear::JSONRPC::Params params)
 {
     emit notify(QString::fromStdString(method), jsonToVariant(params));
 }
