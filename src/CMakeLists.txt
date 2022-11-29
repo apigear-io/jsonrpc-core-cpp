@@ -7,16 +7,7 @@ set(JSONRPC_SOURCES
         jsonrpc/stdoutlogger.cpp
 )
 
-SET(JSONRPC_HEADERS
-        jsonrpc/types.h
-        jsonrpc/jsonrpc.h
-        jsonrpc/rpcprotocol.h
-        jsonrpc/stdoutlogger.h
-)
-
-
-
-add_library (jsonrpc_core STATIC ${JSONRPC_SOURCES} ${JSONRPC_HEADERS})
+add_library (jsonrpc_core STATIC ${JSONRPC_SOURCES})
 
 target_include_directories (jsonrpc_core
   PUBLIC
