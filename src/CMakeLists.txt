@@ -32,20 +32,3 @@ target_include_directories (jsonrpc_core
 target_link_libraries(jsonrpc_core PUBLIC nlohmann_json::nlohmann_json)
 
 
-# install binary files
-install(TARGETS jsonrpc_core
-        EXPORT  jsonrpc_coreConfig
-        RUNTIME DESTINATION bin COMPONENT Runtime
-        LIBRARY DESTINATION lib COMPONENT Runtime
-        ARCHIVE DESTINATION lib/jsonrpc_core COMPONENT Development)
-# install includes
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.h")
-include(CMakePackageConfigHelpers)
-export(TARGETS
-    jsonrpc_core
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/jsonrpc_coreConfig.cmake"
-)
-install(EXPORT
-    jsonrpc_coreConfig
-    DESTINATION "lib/jsonrpc_core/cmake"
-)
