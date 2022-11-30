@@ -29,7 +29,7 @@ target_include_directories (jsonrpc_core
   $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(jsonrpc_core PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(jsonrpc_core PUBLIC nlohmann_json::nlohmann_json)
 
 
 # install binary files
