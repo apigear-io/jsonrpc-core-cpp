@@ -25,7 +25,6 @@
 
 #include "jsonrpc/rpcprotocol.h"
 #include "jsonrpc/stdoutlogger.h"
-#include "nlohmann/json.hpp"
 
 QJsonRpc::QJsonRpc(QObject *parent)
     : QObject(parent)

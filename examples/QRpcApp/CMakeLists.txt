@@ -34,4 +34,4 @@ target_link_libraries(QRpcApp
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::WebSockets)
 
 
-target_link_libraries(QRpcApp PRIVATE nlohmann_json::nlohmann_json jsonrpc_core)
+target_link_libraries(QRpcApp PRIVATE jsonrpc_core)
