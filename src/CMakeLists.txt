@@ -31,4 +31,15 @@ target_include_directories (jsonrpc_core
 
 target_link_libraries(jsonrpc_core PUBLIC nlohmann_json::nlohmann_json)
 
+# install binary files
+install(TARGETS jsonrpc_core
+        EXPORT  jsonrpc_coreTargets
+        RUNTIME DESTINATION bin           COMPONENT Runtime
+        LIBRARY DESTINATION lib           COMPONENT Runtime
+        ARCHIVE DESTINATION lib           COMPONENT Development)
+# install includes
+install(FILES ${INCLUDES}
+        DESTINATION include/jsonrpc)
 
+export(EXPORT jsonrpc_coreTargets
+)
