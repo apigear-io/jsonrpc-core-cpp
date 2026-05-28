@@ -11,3 +11,7 @@ See Qt Demo App (example/QRpcApp)
 
 
 
+
+## License
+
+Licensed under the [MIT License](./LICENSE). See [LICENSE](./LICENSE) for details.
